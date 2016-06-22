@@ -1,21 +1,23 @@
+'use strict';
+
 describe('airport', function() {
 
 	var airport;
 	var plane;
-	var weatherReporter;
+	var weather;
 
 	beforeEach(function(){
-		airport = new Airport(weatherReporter);
+		weather = jasmine.createSpyObj('weather', ['isStormy']);
+		airport = new Airport(weather);
 		plane = jasmine.createSpy('plane');
-		weatherReporter = jasmine.createSpyObj('weatherReporter', ['isStormy']);
+		
 
 	});
 
 	describe('land', function() {
-		it('does not allow a plane to land when stormy', function() {
-			weatherReporter.isStormy.and.returnValue(true);
-			expect(function(){airport.land(plane); }).toThrowError('Cannot land plane, too stormy!');
-
+		it('does not allow a plane to land when stormy', function(){
+			weather.isStormy.and.returnValue(true);
+			expect(function(){ airport.land(plane); }).toThrowError('Cannot land plane, too stormy!');
 		});
 	});
 });

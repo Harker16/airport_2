@@ -1,22 +1,22 @@
 'use strict';
 
-describe('WeatherReporter', function() {
+describe('Weather', function() {
 
 	describe('isStormy', function() {
 
-		var weatherReporter;
+		var weather;
 
 		beforeEach(function() {
-		weatherReporter = new WeatherReporter();
+		weather = new Weather();
 		});
 
 		it('can be non-stormy', function() {
 			spyOn(Math, 'random').and.returnValue(0);
-			expect(weatherReporter.isStormy()).toBe(false);
+			expect(weather.isStormy()).toBe(false);
 		});
 		it('can be stormy', function() {
 			spyOn(Math, 'random').and.returnValue(1);
-			expect(weatherReporter.isStormy()).toBe(true);
+			expect(weather.isStormy()).toBe(true);
 		});
 	});
 
